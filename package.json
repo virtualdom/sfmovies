@@ -32,6 +32,8 @@
     "bookshelf": "^0.9.5",
     "hapi": "^13.4.1",
     "hapi-bookshelf-serializer": "^2.1.0",
+    "hapi-format-error": "^1.0.0",
+    "joi": "^8.1.1",
     "knex": "^0.11.5",
     "pg": "^4.5.5"
   },
