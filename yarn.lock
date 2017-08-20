@@ -1008,6 +1008,10 @@ hapi-bookshelf-serializer@^2.1.0:
     bluebird "^2.9.34"
     boom "^2.8.0"
 
+hapi-format-error@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/hapi-format-error/-/hapi-format-error-1.1.0.tgz#28d97f82b40f1b1d1b62b0215eab1cdfe983bbde"
+
 hapi@^16.5.2:
   version "16.5.2"
   resolved "https://registry.yarnpkg.com/hapi/-/hapi-16.5.2.tgz#d1dadf33721c6ac3aaa905ce086d9c7ffb883092"
