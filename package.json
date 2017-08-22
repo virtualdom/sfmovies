@@ -7,7 +7,11 @@
   "author": "Dom <dom@lob.com>",
   "license": "MIT",
   "dependencies": {
-    "hapi": "^16.5.2"
+    "bookshelf": "^0.10.4",
+    "hapi": "^16.5.2",
+    "hapi-bookshelf-serializer": "^2.1.0",
+    "knex": "^0.13.0",
+    "pg": "^7.1.2"
   },
   "devDependencies": {
     "chai": "^3.0.0",
@@ -19,6 +23,13 @@
     "nodemon": "^1.11.0"
   },
   "scripts": {
+    "db:migrate": "knex migrate:latest --knexfile db/index.js",
+    "db:migrate:make": "knex migrate:make --knexfile db/index.js",
+    "db:reset": "if [ \"$NODE_ENV\" != \"production\" ]; then dropdb $(node -p \"require('./config').DB_NAME\"); yarn run db:setup && yarn run db:migrate; fi",
+    "db:rollback": "knex migrate:rollback --knexfile db/index.js",
+    "db:seed": "yarn run db:reset && knex seed:run --knexfile db/index.js",
+    "db:setup": "if [ \"$NODE_ENV\" != \"production\" ]; then createdb -O $(node -e \"var c = require('./config'); console.log(c.DB_USER, c.DB_NAME);\"); fi",
+    "db:setup:user": "if [ \"$NODE_ENV\" != \"production\" ]; then createuser $(node -p \"require('./config').DB_USER\"); fi",
     "lint": "eslint .",
     "release:patch": "changelog -p && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version patch && git push origin && git push origin --tags",
     "release:minor": "changelog -m && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version minor && git push origin && git push origin --tags",
