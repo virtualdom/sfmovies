@@ -7,39 +7,39 @@ const MovieValidator = require('../../lib/validators/movie');
 describe('movie validator', () => {
 
   it('succeeds when all allowed params are included', () => {
-    const title = 'title';
+    const name = 'title';
     const release_year = 2017;
-    const payload = { title, release_year };
+    const payload = { name, release_year };
     const result = Joi.validate(payload, MovieValidator);
 
     expect(result.error).to.be.null;
   });
 
-  describe('title', () => {
+  describe('name', () => {
 
     it('is required', () => {
       const payload = {};
       const result = Joi.validate(payload, MovieValidator);
 
-      expect(result.error.details[0].path).to.eql('title');
+      expect(result.error.details[0].path).to.eql('name');
       expect(result.error.details[0].type).to.eql('any.required');
     });
 
     it('is less than 255 characters', () => {
-      const title = 'a'.repeat(256);
-      const payload = { title };
+      const name = 'a'.repeat(256);
+      const payload = { name };
       const result = Joi.validate(payload, MovieValidator);
 
-      expect(result.error.details[0].path).to.eql('title');
+      expect(result.error.details[0].path).to.eql('name');
       expect(result.error.details[0].type).to.eql('string.max');
     });
 
     it('is nonempty', () => {
-      const title = '';
-      const payload = { title };
+      const name = '';
+      const payload = { name };
       const result = Joi.validate(payload, MovieValidator);
 
-      expect(result.error.details[0].path).to.eql('title');
+      expect(result.error.details[0].path).to.eql('name');
       expect(result.error.details[0].type).to.eql('any.empty');
     });
 
@@ -48,9 +48,9 @@ describe('movie validator', () => {
   describe('release_year', () => {
 
     it('is after 1878', () => {
-      const title = 'Dom The Bomb';
+      const name = 'Dom The Bomb';
       const release_year = 1877;
-      const payload = { title, release_year };
+      const payload = { name, release_year };
       const result = Joi.validate(payload, MovieValidator);
 
       expect(result.error.details[0].path).to.eql('release_year');
@@ -58,9 +58,9 @@ describe('movie validator', () => {
     });
 
     it('is limited to 4 digits', () => {
-      const title = 'Dom The Bomb 2: Domlectric Boogaloo';
+      const name = 'Dom The Bomb 2: Domlectric Boogaloo';
       const release_year = 10000;
-      const payload = { title, release_year };
+      const payload = { name, release_year };
       const result = Joi.validate(payload, MovieValidator);
 
       expect(result.error.details[0].path).to.eql('release_year');
@@ -68,17 +68,17 @@ describe('movie validator', () => {
     });
 
     it('is optional', () => {
-      const title = 'Dom 3 Bomb';
-      const payload = { title };
+      const name = 'Dom 3 Bomb';
+      const payload = { name };
       const result = Joi.validate(payload, MovieValidator);
 
       expect(result.error).to.be.null;
     });
 
     it('is limited to integers', () => {
-      const title = 'Dom Fast Dom 4ious';
+      const name = 'Dom Fast Dom 4ious';
       const release_year = 2017.89;
-      const payload = { title, release_year };
+      const payload = { name, release_year };
       const result = Joi.validate(payload, MovieValidator);
 
       expect(result.error.details[0].path).to.eql('release_year');
