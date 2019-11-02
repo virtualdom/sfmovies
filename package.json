@@ -12,7 +12,7 @@
     "hapi-bookshelf-serializer": "^2.1.0",
     "hapi-format-error": "^1.1.0",
     "joi": "^10.6.0",
-    "knex": "^0.13.0",
+    "knex": "^0.19.5",
     "pg": "^7.1.2"
   },
   "devDependencies": {
